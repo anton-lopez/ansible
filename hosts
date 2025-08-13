@@ -1,6 +1,10 @@
-[lin_nodes]
-endpoint-l1 ansible_host=10.8.6.201 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3
-endpoint-l2 ansible_host=10.8.6.202 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3
-endpoint-l3 ansible_host=10.8.6.203 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3
-endpoint-l4 ansible_host=10.8.6.204 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3
-endpoint-l5 ansible_host=10.8.6.205 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3
+[web-servers]
+endpoint-l1 ansible_host=10.8.6.201 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3 apache_package=httpd php_package=php
+endpoint-l2 ansible_host=10.8.6.202 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3 apache_package=httpd php_package=php
+
+[db_servers]
+endpoint-l3 ansible_host=10.8.6.203 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3 apache_package=httpd php_package=php
+endpoint-l4 ansible_host=10.8.6.204 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3 apache_package=httpd php_package=php
+
+[file_servers]
+endpoint-l5 ansible_host=10.8.6.205 ansible_user=ansible ansible_python_interpreter=/usr/bin/python3 apache_package=httpd php_package=php

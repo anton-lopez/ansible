@@ -1,0 +1,49 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install Updates
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "Rocky"
+
+- hosts: web_servers
+  become: true
+  tasks:
+ 
+  - name: Install Apache HTTP and PHP
+    tags: apache,rocky,httpd
+    dnf:
+      name:
+        - php-cli
+        - php-common
+        - "{{ apache_package }}"
+        - "{{ php_package }}"  
+      state: present
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: Install MariaDB
+    tags: rocky,db,mariadb
+    dnf:
+      name: 
+        - mariadb
+        - mariadb-server
+      state: latest
+    when: ansible_distribution == "Rocky"
+
+- hosts: file_servers
+  become: true
+  tasks:
+    
+  - name: Install Samba
+    tags: samba
+    package:
+      name: samba
+      state: latest

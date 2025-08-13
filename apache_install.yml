@@ -4,22 +4,12 @@
   become: true
   tasks:
   
-  - name: Update Repository Index
-    dnf:
-      update_cache: yes
-    when: ansible_distribution == "Rocky"
-
-  - name: Install Apache HTTP Server
-    dnf:
-      name: httpd
-      state: present
-    when: ansible_distribution == "Rocky"
-
-  - name: Add PHP Support for Apache
+  - name: Install Apache HTTP and PHP
     dnf:
       name:
-        - php
         - php-cli
         - php-common
+        - "{{ apache_package }}"
+        - "{{ php_package }}"  
       state: present
-    when: ansible_distribution == "Rocky"
+      update_cache: yes
