@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install Apache HTTP Server
+    dnf:
+      name: httpd
+      state: absent
+
+  - name: Add PHP Support for Apache
+    dnf:
+      name:
+        - php
+        - php-cli
+        - php-common
+      state: absent
