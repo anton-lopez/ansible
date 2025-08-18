@@ -4,11 +4,11 @@
   become: true
   tasks:
 
-  - name: Install Updates
+  - name: Update Repo Cache
     tags: always
     dnf:
-      update_only: yes
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "Rocky"
 
 - hosts: web_servers
@@ -81,3 +81,28 @@
     #   mode: 0755
     # owner: root
     # group: root
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Create Background User
+    tags: always
+    user:
+      name: background
+      groups: root
+
+  - name: Add SHH Key for Background
+    tags: always
+    authorized_key:
+      user: background
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQ/Z6hdJnMpuZd3ls6Zxq6A6TrdUSt0m1nhUwueYaya ansible"
+
+  - name: Add Sudoers File for Background
+    tags: always
+    copy:
+      src: sudoer_background
+      dest: /etc/sudoers.d/background
+      owner: root
+      group: root
+      mode: 0440
