@@ -24,7 +24,15 @@
         - "{{ apache_package }}"
         - "{{ php_package }}"  
       state: present
-      
+  
+  - name: Start httpd (Rocky)
+    tags: apache,rocky,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Rocky"    
+
   - name: Copy Default HTML File
     tags: apache,apache2,httpd
     copy:
@@ -61,15 +69,15 @@
   become: true
   tasks:
 
-    - name: Install unzip
-      package:
-        name: unzip
+    # - name: Install unzip
+    # package:
+    # name: unzip
 
-    - name: Install terraform
-      unarchive:
-        src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-        dest: /usr/local/bin
-        remote_src: yes
-        mode: 0755
-        owner: root
-        group: root
+    # - name: Install terraform
+    # unarchive:
+    #   src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+    #   dest: /usr/local/bin
+    #   remote_src: yes
+    #   mode: 0755
+    # owner: root
+    # group: root
