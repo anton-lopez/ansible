@@ -1,0 +1,9 @@
+ - name: Install MariaDB
+   tags: rocky,db,mariadb
+   dnf:
+     name:
+       - mariadb
+       - mariadb-server
+     state: latest
+   when: ansible_distribution == "Rocky"
+

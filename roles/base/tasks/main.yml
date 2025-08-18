@@ -1,0 +1,5 @@
+ - name: Add SHH Key for Background
+   authorized_key:
+     user: background
+     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQ/Z6hdJnMpuZd3ls6Zxq6A6TrdUSt0m1nhUwueYaya ansible"
+
