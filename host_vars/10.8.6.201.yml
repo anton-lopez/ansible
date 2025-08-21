@@ -1,3 +1,5 @@
 apache_package_name: apache2
 apacke_service: apache2
 php_package_name: libapache2-mod-php
+ssh_users: "ansible background"
+ssh_template_file: sshd_config_rocky.j2
